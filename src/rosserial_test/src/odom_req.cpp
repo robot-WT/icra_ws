@@ -14,13 +14,13 @@ LinoBase::LinoBase():
     velocity_subscriber_ = nh_.subscribe("/cmd_vel", 50, &LinoBase::velCallback, this);
 }
 
-void LinoBase::velCallback(const rosserial_test::speed& vel)
+void LinoBase::velCallback(const geometry_msgs::Twist& vel)
 {
     ros::Time current_time = ros::Time::now();
 
-    linear_velocity_x_ = vel.linear_x;
-    linear_velocity_y_ = vel.linear_y;
-    angular_velocity_z_ = vel.angular_z;
+    linear_velocity_x_ = vel.linear.x;
+    linear_velocity_y_ = vel.linear.y;
+    angular_velocity_z_ = vel.angular.z;
 
     vel_dt_ = (current_time - last_vel_time_).toSec();
     last_vel_time_ = current_time;

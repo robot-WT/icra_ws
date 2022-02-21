@@ -3,15 +3,22 @@
 #include<rosserial_test/SerialPort.h>
 using namespace std;
 
-unsigned char vx[4];
-unsigned char vy[4];
-unsigned char wz[4];
+struct speed {
+        float x = 0.0;
+        float y = 0.0;
+        float z = 0.0;
+}sp;
+
+unsigned char speed_send[12];
+
 void send_speed(const geometry_msgs::Twist::ConstPtr &speed_msg)
 {
+        sp.x = speed_msg->linear.x;
+        sp.y = speed_msg->linear.y;
+        sp.z = speed_msg->angular.z;
 
-        memcpy(vx, &speed_msg->linear.x, 4);
-        memcpy(vy, &speed_msg->linear.y, 4);
-        memcpy(wz, &speed_msg->angular.z, 4);
+        memcpy(speed_send, &sp, 12);
+
         cout<<"speed_vx = "<<speed_msg->linear.x<<endl;
         //根据前面制定的发送贫频率自动休眠 休眠时间 = 1/频率；
 }
@@ -21,7 +28,7 @@ int main(int argc, char *argv[])
     ros::init(argc, argv, "SerialPort");
     ros::NodeHandle nh;
     geometry_msgs::Twist speed_msg;
-    ros::Subscriber speed_sub = nh.subscribe<geometry_msgs::Twist>("tertlesim1/cmd_vel",10, send_speed);
+    ros::Subscriber speed_sub = nh.subscribe<geometry_msgs::Twist>("/cmd_vel",10, send_speed);
 
     //串口初始化相关
     SerialPort w;
@@ -38,10 +45,8 @@ int main(int argc, char *argv[])
     //节点不死
     while (ros::ok())
     {
-        w.send(vx, sizeof(vx));
-        w.send(vy, sizeof(vy));
-        w.send(wz, sizeof(wz));
-    
+
+        int count_send =  w.send(speed_send, sizeof(sp));
         r.sleep();
 
         ros::spinOnce();

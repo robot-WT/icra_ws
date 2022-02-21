@@ -6,13 +6,13 @@
 #include <nav_msgs/Odometry.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <geometry_msgs/TransformStamped.h>
-#include<rosserial_test/speed.h>
+#include <geometry_msgs/Twist.h>
 
 class LinoBase
 {
 public:
     LinoBase();
-    void velCallback(const rosserial_test::speed& vel);
+    void velCallback(const geometry_msgs::Twist& vel);
 
 private:
     ros::NodeHandle nh_;
