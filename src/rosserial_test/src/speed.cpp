@@ -13,8 +13,8 @@ unsigned char speed_send[12];
 
 void send_speed(const geometry_msgs::Twist::ConstPtr &speed_msg)
 {
-        sp.x = speed_msg->linear.x;
-        sp.y = speed_msg->linear.y;
+        sp.x = speed_msg->linear.y;
+        sp.y = speed_msg->linear.x;
         sp.z = speed_msg->angular.z;
 
         memcpy(speed_send, &sp, 12);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         return 0;
     }
     //逻辑(一秒10次)
-    ros::Rate r(1);
+    ros::Rate r(10);
 
     //节点不死
     while (ros::ok())
