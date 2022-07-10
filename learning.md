@@ -6,7 +6,8 @@
  # 2022.7.10<br>
  南工骁鹰自动步兵开源代码：<https://github.com/hoshino-lr/hitsz_AutoCar_2022> <br>
  西北工业大学开源代码：<https://github.com/nwpu-v5-team/ICRA-RoboMaster-2020-Planning/wiki/6.-%E7%AE%97%E6%B3%95><br>
-华中科技大学2D仿真：<https://github.com/LoveThinkinghard/RoboMaster-AI-Challenge-Simulator-2D> <b>
+华中科技大学2D仿真：<https://github.com/LoveThinkinghard/RoboMaster-AI-Challenge-Simulator-2D> <br>
+这里还有一篇github，写得不怎么好，但一些方向可以参考：<https://github.com/gongpx20069/ICRA2020_RM_decision-making> <br>
 
 
 
